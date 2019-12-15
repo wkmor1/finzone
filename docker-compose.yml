@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  postgis:
+    image: mdillon/postgis
+    restart: always
+    volumes:
+      - ./postgis:/var/lib/postgresql/data
+    container_name: postgis
+  geospatial:
+    build: geospatial/.
+    restart: always
+    ports:
+      - "8787"
+      - "3838"
+    environment:
+      - USER="${USER}"
+      - PASSWORD="${PASSWORD}"
+    links:
+      - postgis
+    volumes:
+      - "./${USER}:/home/${USER}"
+    container_name: geospatial
