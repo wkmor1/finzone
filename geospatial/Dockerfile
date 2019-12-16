@@ -18,3 +18,15 @@ RUN    git clone https://github.com/cbig/zonation-core \
     && make \
     && cd .. \
     && rm -rf zonation-core
+
+COPY   finzone finzone
+RUN    R -e "devtools::install('finzone')" \
+    && echo "\n\
+       \nlocal({ \
+       \noptions(shiny.port = 3838, shiny.host = '0.0.0.0') \
+       \n})" >> /usr/local/lib/R/etc/Rprofile.site \
+    && rm -rf finzone
+
+EXPOSE 3838
+
+CMD ["R", "-e", "finzone::run()"]

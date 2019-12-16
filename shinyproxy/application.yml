@@ -1,0 +1,19 @@
+proxy:
+  port: 8080
+  authentication: simple
+  users:
+  - name: user
+    password: password
+  docker:
+    internal-networking: true
+  specs:
+  - id: 01_finzone
+    display-name: finzone
+    description: Finzone
+    container-cmd: ["R", "-e", "finzone::run()"]
+    container-image: finzone/geospatial
+    container-network: shinynet
+
+logging:
+  file:
+    shinyproxy.log

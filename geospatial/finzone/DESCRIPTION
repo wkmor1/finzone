@@ -1,0 +1,11 @@
+Package: finzone
+Maintainer: William Morris <willi@mmorris.email>
+License: MIT + file LICENSE
+Title: Finzone
+Type: Package
+Author: William Morris
+Description: FinBIF plus Zonation
+Version: 0.0.0.9000
+Imports:
+    shiny
+RoxygenNote: 7.0.2

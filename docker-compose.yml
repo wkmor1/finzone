@@ -1,17 +1,19 @@
 version: "3.7"
 services:
+
   postgis:
     image: mdillon/postgis
     restart: always
     volumes:
       - ./postgis:/var/lib/postgresql/data
     container_name: postgis
+
   geospatial:
-    build: geospatial/.
+    build: ./geospatial
+    image: finzone/geospatial
     restart: always
     ports:
-      - "8787"
-      - "3838"
+      - 8787
     environment:
       - USER="${USER}"
       - PASSWORD="${PASSWORD}"
@@ -20,3 +22,20 @@ services:
     volumes:
       - "./${USER}:/home/${USER}"
     container_name: geospatial
+
+  shinyproxy:
+    build: ./shinyproxy
+    image: finzone/shinyproxy
+    restart: always
+    container_name: shinyproxy
+    ports:
+      - 8080
+    networks:
+      - default
+      - shinynet
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  shinynet:
+    name: shinynet
