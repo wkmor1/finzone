@@ -20,11 +20,10 @@ RUN    git clone https://github.com/cbig/zonation-core \
     && rm -rf zonation-core
 
 COPY   finzone finzone
-RUN    R -e "devtools::install('finzone')" \
-    && echo "\n\
-       \nlocal({ \
-       \noptions(shiny.port = 3838, shiny.host = '0.0.0.0') \
-       \n})" >> /usr/local/lib/R/etc/Rprofile.site \
+RUN    R -e "remotes::install_local('finzone')" \
+RUN    R -e "remotes::install_github(c('wkmor1/rzonation', 'wkmor1/finbif@dev'))" \
+    && echo "\noptions(shiny.port = 3838, shiny.host = '0.0.0.0') \
+       \n" >> /usr/local/lib/R/etc/Rprofile.site \
     && rm -rf finzone
 
 EXPOSE 3838
