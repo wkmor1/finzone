@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.3"
 services:
 
   postgis:
@@ -30,12 +30,5 @@ services:
     container_name: shinyproxy
     ports:
       - 8080
-    networks:
-      - default
-      - shinynet
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-
-networks:
-  shinynet:
-    name: shinynet

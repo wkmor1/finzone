@@ -12,7 +12,7 @@ proxy:
     description: Finzone
     container-cmd: ["R", "-e", "finzone::run()"]
     container-image: finzone/geospatial
-    container-network: shinynet
+    container-network: finzone_default
 
 logging:
   file:
