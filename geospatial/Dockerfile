@@ -2,7 +2,10 @@ FROM rocker/geospatial
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
-         libboost-all-dev \
+         cmake \
+         libboost-filesystem-dev \
+         libboost-program-options-dev \
+         libboost-thread-dev \
          libqt4-dev \
          libqwt-dev \
     && apt-get clean \

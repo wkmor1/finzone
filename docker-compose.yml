@@ -17,6 +17,7 @@ services:
     environment:
       - USER="${USER}"
       - PASSWORD="${PASSWORD}"
+      - ROOT=true
     links:
       - postgis
     volumes:
@@ -32,3 +33,10 @@ services:
       - 8080
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.57.0/24
